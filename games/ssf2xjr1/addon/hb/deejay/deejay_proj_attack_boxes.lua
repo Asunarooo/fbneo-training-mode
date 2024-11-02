@@ -1,0 +1,10 @@
+
+["1"] = {type="proj. attack", id=1, address=0x74134, hrad=15, hval=0, vrad=12, vval=-0},
+["2"] = {type="proj. attack", id=2, address=0x74144, hrad=15, hval=0, vrad=12, vval=-0},
+["3"] = {type="proj. attack", id=3, address=0x74154, hrad=15, hval=0, vrad=12, vval=-0},
+["4"] = {type="proj. attack", id=4, address=0x74164, hrad=31, hval=-16, vrad=12, vval=-0},
+["5"] = {type="proj. attack", id=5, address=0x74174, hrad=31, hval=-16, vrad=12, vval=-0},
+["6"] = {type="proj. attack", id=6, address=0x74184, hrad=31, hval=-16, vrad=12, vval=-0},
+["7"] = {type="proj. attack", id=7, address=0x74194, hrad=15, hval=0, vrad=8, vval=-0},
+["8"] = {type="proj. attack", id=8, address=0x741A4, hrad=15, hval=0, vrad=8, vval=-0},
+["9"] = {type="proj. attack", id=9, address=0x741B4, hrad=15, hval=0, vrad=8, vval=-0},

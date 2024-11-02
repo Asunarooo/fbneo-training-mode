@@ -1,0 +1,20 @@
+Dhalsim : pas fait
+
+
+Blanka : Faire les spéciaux (la roll boucle)
+Boxer : Manque les dashes + TAP + Super
+Cammy : Spiral Arrows MK / HK (manque des anims car cycle) / Hooligan : cycle + ni MP / ni HP /
+Chun : Pas de headstomp sur saut neutre + Kikouken, problème de distance + SBK (cycle) + Pas de SBK aérien + 1000K (cycle)
+Claw : Faire sans griffe + Wall Dives (P/K)
+Dicta : Seconde partie du J MP + Psycho Crusher LP/MP/HP (problème de distance sur recover) HP (cycle presque deux fois) / Headstomp : Startup = OK, le reste, jsp comment faire / Devil's reverse : jsp comment faire
+DJ : MGU (voir la partie active, qui fait des cycles) / Sobat Carnival (la framedata varie légèrement de temps en temps)
+Fei : Flame Kick (cycle) + Rekka, voir comment gérer mais détection = OK
+Honda : HHS (cycle) + Double Headbutt (seconde anim = conditionnelle) + landing = +2px ?
+Hawk : Tomahawk (cycle) + Même recover pour MP et HP donc pas noté + Condor Dive + Chopes
+Ken : Tatsu + Crazy kick overhead + Pas de tatsu aérien
+Ryu : Red Hado + Tatsu (intégrer les cycles + distance) + Pas de tatsu aérien [OxFF85B9]
+Zangief : Rajouter les chopes
+
+
+Guile : DONE
+Sagat : DONE
