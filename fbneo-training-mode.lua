@@ -241,7 +241,7 @@ local defaultconfig = {
 
 local config = defaultconfig
 local rom = emu.romname()
-local interactiveguipages = {}
+interactiveguipages = {}
 local configpath = "games/other/"..rom..".lua"
 guiinputs = {
 	P1 = {previousinputs={}, coinframestart = 0, coinpresscount = 0, leftframecount = 0, rightframecount = 0, downframecount = 0, upframecount = 0,},
@@ -962,7 +962,6 @@ function guiTableFormatting(t) -- produces a table of element ids that can be us
 		 ...
 		}
 	--]]
-	
 	local temp = copytable(t)
 	table.sort(temp, function(a,b) if a.y==b.y then return a.x<b.x end return a.y<b.y end) -- sort both here so the 'A' series lookups can give the exact coords
 	
@@ -1083,7 +1082,7 @@ local updateModuleVars = function()
 end
 
 local comboHandlerP1 = function()
-
+	
 	combovars.p1.healthdiff = modulevars.p1.previoushealth - modulevars.p1.health
 
 	combovars.p1.previouscombo = combovars.p1.combo
@@ -1866,7 +1865,7 @@ local applyDirection = function() -- getting a player to hold down/up etc.
 end
 
 -- set up gd images
-local helpElements = {}
+helpElements = {}
 local icons = {[16] = {}} -- follows translationtable series
 local helpButtons = {}
 local helpShell = gd.createFromPng("resources/info/shell.png")
@@ -1924,7 +1923,7 @@ else -- otherwise use these defaults
 	
 end
 
-local buttonHandlerInputs = {
+buttonHandlerInputs = {
 	["button1"] = 1,
 	["button2"] = 2,
 	["button3"] = 3,
@@ -1955,7 +1954,7 @@ local moreButtonsFunc = function(but)
 	helpElements.block = helpElements.block+1
 end
 
-local buttonHandler = function(t)
+buttonHandler = function(t)
 	if (nbuttons == 0) then return end -- can't do anything with no buttons
 	--[[
 		t={
@@ -1985,7 +1984,7 @@ local buttonHandler = function(t)
 		helpElements = {name = t.funcs.name}
 
 		t.len=t.len+1 -- space for back
-
+		
 		t[t.len] = {name="BACK", button="button"..nbuttons} -- insert back as the last button
 
 		for i,v in ipairs(t.funcs) do t[i].func=v end -- copy across funcs
@@ -2019,13 +2018,13 @@ local buttonHandler = function(t)
 			if v.name and v.button then helpElements.len=helpElements.len+1 end
 		end
 		helpElements.len = math.min(nbuttons,helpElements.len)
-	end
+	end  
 	
 	helpElements.name = t.funcs.name
 	
 end
 
-local toggledrawhelp = true
+toggledrawhelp = true
 
 local drawHelp = function()
 	if not (interactivegui.movehud.enabled or interactivegui.enabled or interactivegui.replayeditor.enabled) then return end
@@ -2118,7 +2117,7 @@ local blankKB = function()
 	end
 end
 
-local drawInteractiveGUIFuncs = {
+drawInteractiveGUIFuncs = {
 	function(but) -- SLCT
 		if guiinputs.P1[but] and not guiinputs.P1.previousinputs[but] then
 			callGUISelectionFunc()
@@ -2315,7 +2314,7 @@ local drawInteractiveGUI = function()
 		garbagecount={}
 		garbagecount.disp = math.floor(disp*100)/100
 	end
-	gui.text(boxx+1, boxy2-7, "kB:"..garbagecount.disp)
+	--gui.text(boxx+1, boxy2-7, "kB:"..garbagecount.disp)
 	if page.other_func then page.other_func() end -- if theres anything else to be ran
 	buttonHandler(t)
 end

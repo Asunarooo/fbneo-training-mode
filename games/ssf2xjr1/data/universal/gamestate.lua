@@ -1,9 +1,9 @@
 ----------------------------------------------------------------
 -- Inspired by Grouflon 3rd Strike Training mode 
 -- https://github.com/Grouflon/3rd_training_lua
+-- Stocking and reading in-game values
 ----------------------------------------------------------------
-require("games/ssf2xjr1/memory_addresses")
-require("games/ssf2xjr1/constants")
+require("games/ssf2xjr1/data/universal/memory_addresses")
 
 gamestate = {
 	frame_number = 0,
@@ -38,14 +38,14 @@ function gamestate.reset_player_objects()
 	gamestate.P2 = gamestate.player_objects[2]
 end
 
-function gamestate.update_patch() -- Will be used when the game is reloaded
+function gamestate.update_patch()
 	local patch1 = memory.readdword(0x782a2)
 	local patch2 = memory.readdword(0x2CC8)
 	local patch3 = memory.readdword(0x8e94e)
 	if (patch1 == 0x734AABE4) and (patch2 == 0x3F50A405) and (patch3 == 0x9BF781C3) then
-		gamestate.patched = true 
+		return true 
 	else
-		gamestate.patched = false
+		return false
 	end 
 end 
 
@@ -60,7 +60,7 @@ function gamestate.read_game_vars()
 	---------------------
 	-- current state
 	---------------------
-	--gamestate.patched 	= gamestate.update_patch()
+	gamestate.patched 		= gamestate.update_patch()
 	gamestate.curr_state 	= rw(addresses.global.curr_gamestate)
 	gamestate.is_in_match 	= (rw(addresses.global.match_state) ~= 0)
 	---------------------
@@ -88,6 +88,44 @@ local function isAttacking(_player_obj)
 			end
 		elseif _player_obj.state == doing_special_move or rb(_player_obj.addresses.attack_flag) > 0x00 then 
 			return true
+		end
+	end
+end
+
+local function getCharacterName(_player_obj)
+	for i = 1, #characters do
+		if _player_obj.character == character_specific[characters[i]].infos.id then
+			return characters[i]
+		end
+	end
+end
+
+local function readKnockdown(_player_obj) -- Soft knockdown : revient à false quand le perso se relève / Hard knockdown revient à false quand le perso est relevé
+	if _player_obj.air_state == 255 or _player_obj.state == being_thrown then
+		return true
+	end
+	if _player_obj.is_knockdown then
+		if _player_obj.state ~= being_hit and _player_obj.state ~= being_thrown then
+			return false
+		end
+	end
+end
+
+local function readInHitstun(_player_obj) -- Tells if the player_object is in hitstun or blockstun (return false if in hitfreeze)
+	local DEBUG = true
+	if _player_obj.prev then
+		local hitfreeze_end = false
+		if _player_obj.hitfreeze_counter == 0 and _player_obj.prev.in_hitfreeze then
+			hitfreeze_end = true
+		else
+			hitfreeze_end = false
+		end
+		if gamestate.prev.frame_number ~= gamestate.frame_number then
+			if (_player_obj.prev.hitstun_counter ~= _player_obj.hitstun_counter and _player_obj.hitfreeze_counter == 0) or (_player_obj.state == being_hit and rb(addresses.global.slowdown) ~= 0x00) or (hitfreeze_end and _player_obj.state == being_hit) then
+				return true
+			else
+				return false
+			end
 		end
 	end
 end
@@ -122,6 +160,7 @@ function gamestate.read_player_vars(_player_obj)
 	_player_obj.substate  			= rb(_player_obj.addresses.substate)
 	_player_obj.air_state			= rb(_player_obj.addresses.airborn)
 	_player_obj.airborn 			= (rb(_player_obj.addresses.airborn) > 0x00)
+	_player_obj.is_knockdown		= readKnockdown(_player_obj)
 	_player_obj.projectile_ready 	= (rb(_player_obj.addresses.projectile_ready) == 0x00)
 	_player_obj.cancel_ready		= (rb(_player_obj.addresses.special_cancel) > 0x00)
 	_player_obj.dizzy				= (rb(_player_obj.addresses.dizzy_flag) > 0x00)
@@ -147,15 +186,15 @@ function gamestate.read_player_vars(_player_obj)
 	-- Character
 	-----------------
 	_player_obj.character 			= rb(_player_obj.addresses.character)
-	_player_obj.is_old 				= (rb(_player_obj.addresses.char_old) == 0x01)
+	_player_obj.character_name		= getCharacterName(_player_obj)
+	_player_obj.version				= (rb(_player_obj.addresses.char_old) == 0x01) and "old" or "new"
 	-----------------
 	-- Counters
 	-----------------
 	_player_obj.hitfreeze_counter 	= rb(_player_obj.addresses.hitfreeze_counter)
 	_player_obj.in_hitfreeze		= (_player_obj.hitfreeze_counter ~= 0)
 	_player_obj.hitstun_counter 	= rb(_player_obj.addresses.hitstun_counter)
-	-- _player_obj.in_hitstun =
-	--readInHitstun(_player_obj) 
+	_player_obj.in_hitstun			= readInHitstun(_player_obj) 
 	_player_obj.stun_counter 		= rw(_player_obj.addresses.stun_counter)
 	_player_obj.combo_counter		= rb(_player_obj.addresses.combo_counter)
 	-----------------
@@ -207,6 +246,7 @@ function gamestate.stock_player_vars(_player_obj)
 	projectile_ready 				= _player_obj.projectile_ready,
 	cancel_ready					= _player_obj.cancel_ready,
 	dizzy							= _player_obj.dizzy,
+	is_knockdown					= _player_obj.is_knockdown,
 	-----------------
 	-- Gauges
 	-----------------
@@ -229,17 +269,17 @@ function gamestate.stock_player_vars(_player_obj)
 	-- Character
 	-----------------
 	character						= _player_obj.character,
+	--character_name				= _player_obj.character_name,
 	is_old							= _player_obj.is_old,
 	-----------------
 	-- Counters
 	-----------------
 	hitfreeze_counter				= _player_obj.hitfreeze_counter,
 	in_hitfreeze					= _player_obj.in_hitfreeze,
-	--hitfreeze_end					= _player_obj.hitfreeze_end,
 	hitstun_counter					= _player_obj.hitstun_counter,
 	in_hitstun						= _player_obj.in_hitstun,
 	--stun_counter					= _player_obj.stun_counter,
-	--combo_counter					= _player_obj.combo_counter,
+	combo_counter					= _player_obj.combo_counter,
 	-----------------
 	-- Throw related
 	-----------------

@@ -314,7 +314,7 @@ local function read_projectiles()
 	return current_projectiles
 end
 
-local function update_sf2_hitboxes()
+function update_sf2_hitboxes()
 	if not game then
 		return
 	end

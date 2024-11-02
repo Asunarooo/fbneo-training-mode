@@ -1,0 +1,6 @@
+-- function updateContextualSettings()
+	-- ST_buttons["Training"]["Advanced Hitbox Viewer Settings"]["Display Player 1 Hitboxes"].name = "Display "..printName(player[1]).."'s Hitboxes"
+	-- ST_buttons["Training"]["Advanced Hitbox Viewer Settings"]["Display Player 1 Hitboxes"].link = printName(player[1]).." Display Hitboxes"
+	-- ST_buttons["Training"]["Advanced Hitbox Viewer Settings"]["Display Player 2 Hitboxes"].name = "Display "..printName(player[2]).."'s Hitboxes"
+	-- ST_buttons["Training"]["Advanced Hitbox Viewer Settings"]["Display Player 2 Hitboxes"].link = printName(player[1]).." Display Hitboxes"
+-- end

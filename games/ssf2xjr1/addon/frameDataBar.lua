@@ -16,7 +16,7 @@ framedata_bar_button = {
 				end
 			end,
 	}
-insertAddonButton(framedata_bar_button)
+-- insertAddonButton(framedata_bar_button)
 ------------------------
 -- Initialization
 ------------------------
@@ -345,7 +345,7 @@ end
 local function displayFrameData()
 	local player = {gamestate.P1, gamestate.P2}
 	for i = 1, 2 do
-		if character_specific[readCharacterName(player[i])].infos.has_projectile then
+		if character_specific[player[i].character_name].infos.has_projectile then
 			if not player[i].projectile_ready then
 				return true
 			end
@@ -366,8 +366,8 @@ local function defineFrame(_player_obj, frame)
 	writeFrameCount(frame)
 end
 
-local function frameDataBar()
-	if framedata_bar_selector > 0 then
+function frameDataBar()
+	-- if buttons.addons["Framedata Bar"] > 0 then
 		if gamestate.is_in_match then
 			-- Draw Framedata Bar
 			for i = 1, 2 do
@@ -444,7 +444,7 @@ local function frameDataBar()
 			gui.text(100,100,"Last non idle frame P1 : "..last_non_idle_frame[1])
 			gui.text(100,110,"Last non idle frame P2 : "..last_non_idle_frame[2])
 		end
-	end
+	-- end
 end
 
 table.insert(ST_functions, frameDataBar)

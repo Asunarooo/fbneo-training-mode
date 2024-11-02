@@ -27,7 +27,7 @@ insertAddonButton(blanka_os_button)
 local function throwAttemptHP()
 	local p1 = gamestate.P1
 	local p2 = gamestate.P2
-	local p2character = readCharacterName(gamestate.P2)
+	local p2character = gamestate.P2.character_name
 	local can_throw = false
 	
 	if p1.flip_input then
