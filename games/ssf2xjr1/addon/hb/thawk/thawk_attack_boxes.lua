@@ -1,0 +1,11 @@
+
+["35"] = {type="attack", id=35, address=0x19E514, hrad=26, hval=27, vrad=17, vval=48},
+["36"] = {type="attack", id=36, address=0x19E524, hrad=18, hval=86, vrad=27, vval=86},
+["37"] = {type="attack", id=37, address=0x19E534, hrad=20, hval=80, vrad=22, vval=88},
+["39"] = {type="attack", id=39, address=0x19E554, hrad=26, hval=27, vrad=17, vval=48},
+["40"] = {type="attack", id=40, address=0x19E564, hrad=18, hval=86, vrad=27, vval=86},
+["41"] = {type="attack", id=41, address=0x19E574, hrad=20, hval=80, vrad=22, vval=88},
+["42"] = {type="attack", id=42, address=0x19E584, hrad=26, hval=27, vrad=17, vval=48},
+["43"] = {type="attack", id=43, address=0x19E594, hrad=18, hval=86, vrad=27, vval=86},
+["44"] = {type="attack", id=44, address=0x19E5A4, hrad=20, hval=80, vrad=22, vval=88},
+["49"] = {type="attack", id=49, address=0x19E5F4, hrad=24, hval=30, vrad=21, vval=55},

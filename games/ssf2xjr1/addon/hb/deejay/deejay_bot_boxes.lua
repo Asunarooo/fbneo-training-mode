@@ -1,0 +1,12 @@
+
+["1"] = {type="vulnerability", id=1, address=0x19F2FC, hrad=23, hval=-1, vrad=18, vval=19},
+["2"] = {type="vulnerability", id=2, address=0x19F300, hrad=23, hval=2, vrad=15, vval=53},
+["5"] = {type="vulnerability", id=5, address=0x19F30C, hrad=16, hval=-3, vrad=17, vval=51},
+["6"] = {type="vulnerability", id=6, address=0x19F310, hrad=24, hval=-23, vrad=12, vval=76},
+["7"] = {type="vulnerability", id=7, address=0x19F314, hrad=30, hval=22, vrad=14, vval=80},
+["8"] = {type="vulnerability", id=8, address=0x19F318, hrad=16, hval=18, vrad=17, vval=56},
+["9"] = {type="vulnerability", id=9, address=0x19F31C, hrad=17, hval=-2, vrad=18, vval=51},
+["10"] = {type="vulnerability", id=10, address=0x19F320, hrad=23, hval=-3, vrad=15, vval=13},
+["20"] = {type="vulnerability", id=20, address=0x19F348, hrad=19, hval=-1, vrad=11, vval=63},
+["33"] = {type="vulnerability", id=33, address=0x19F37C, hrad=23, hval=7, vrad=18, vval=19},
+["34"] = {type="vulnerability", id=34, address=0x19F380, hrad=23, hval=21, vrad=18, vval=19},
